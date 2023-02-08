@@ -1,0 +1,12 @@
+0x000:                      | main:
+0x000: 30f41000000000000000 |     irmovq $16, %rsp
+0x00a: 30f30700000000000000 |     irmovq $7, %rbx
+0x014: a03f                 |     pushq %rbx
+0x016: b01f                 |     popq %rcx
+0x018: 10                   |     nop
+0x019: 6031                 |     addq %rbx, %rcx
+                            |     
+0x01b: 30f80300000000000000 |     irmovq $3, %r8x
+0x025: 6238                 |     andq %rbx, %r8x
+0x027: 30f90300000000000000 |     irmovq $3, %r9x
+0x031: 6339                 |     xorq %rbx, %r9x

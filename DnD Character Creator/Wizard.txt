@@ -1,0 +1,6 @@
+Hit_Dice: -1d6
+HP_Max: -6
+saving_throws:- - - -X-X- -
+2
+Arcana-History-Insight-Investigation-Medicine-Religion
+

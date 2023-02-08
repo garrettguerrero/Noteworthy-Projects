@@ -1,0 +1,6 @@
+Hit_Dice: -1d10
+HP_Max: -10
+saving_throws:-X-X- - - - -
+3
+Animal Handling-Athletics-Insight-Investigation-Nature-Perception-Stealth-Survival
+

@@ -1,0 +1,98 @@
+main:
+    irmovq $1056, %rsp
+
+    # starting loc for a
+    irmovq $0, %r8
+    irmovq $2, %rbx
+    rmmovq %rbx, $0(%r8)
+    irmovq $2, %rbx
+    rmmovq %rbx, $8(%r8)
+    irmovq $3, %rbx
+    rmmovq %rbx, $16(%r8)
+    irmovq $4, %rbx
+    rmmovq %rbx, $24(%r8)
+
+    # starting loc for b
+    irmovq $32, %r9
+    irmovq $2, %rbx
+    rmmovq %rbx, $0(%r9)
+    irmovq $2, %rbx
+    rmmovq %rbx, $8(%r9)
+    irmovq $2, %rbx
+    rmmovq %rbx, $16(%r9)
+    irmovq $3, %rbx
+    rmmovq %rbx, $24(%r9)
+
+    call matmult
+
+    irmovq $105, %r12
+    halt
+
+# mult is our multiplier
+mult:
+    # a -> %rdi, b -> %rsi
+    irmovq $0, %rax
+    irmovq $1, %r11
+    call loop
+    ret
+
+loop:
+    addq %rdi, %rax
+    subq %r11, %rsi
+    jg loop
+    ret
+
+matmult:
+    # a pointer -> %r8, b pointer -> %r9
+    # c pointer -> %rcx
+
+    # op for c[0][0]
+    # temp = %rdx, %r10
+    irmovq $64, %rcx
+
+    mrmovq (%r8), %rdi
+    mrmovq (%r9), %rsi
+    call mult #stores result in rax
+    rrmovq %rax, %r10 #gets first value
+    mrmovq $8(%r8), %rdi
+    mrmovq $16(%r9), %rsi
+    call mult
+    addq %rax, %r10
+    rmmovq %r10, (%rcx) # done setting c1
+
+    mrmovq (%r8), %rdi
+    mrmovq 8(%r9), %rsi
+    call mult #stores result in rax
+    rrmovq %rax, %r10 #gets first value
+    mrmovq $8(%r8), %rdi
+    mrmovq $24(%r9), %rsi
+    call mult
+    addq %rax, %r10
+    rmmovq %r10, $8(%rcx)
+
+    mrmovq $16(%r8), %rdi
+    mrmovq (%r9), %rsi
+    call mult #stores result in rax
+    rrmovq %rax, %r10 #gets first value
+    mrmovq $24(%r8), %rdi
+    mrmovq $16(%r9), %rsi
+    call mult
+    addq %rax, %r10
+    rmmovq %r10, $16(%rcx)
+
+    mrmovq $16(%r8), %rdi
+    mrmovq $8(%r9), %rsi
+    call mult #stores result in rax
+    rrmovq %rax, %r10 #gets first value
+    mrmovq $24(%r8), %rdi
+    mrmovq $24(%r9), %rsi
+    call mult
+    addq %rax, %r10
+    rmmovq %r10, $24(%rcx)
+
+    ret
+
+
+
+
+    

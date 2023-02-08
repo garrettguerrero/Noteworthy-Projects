@@ -1,0 +1,14 @@
+Please list all sources (people, books, webpages, etc.) you consulted regarding this assignment and how they helped: (Sources can be used broadly as reference for the general approach; YOU MUST NOT COPY CODE!)
+
+CSCE 221 Students:
+
+Other People:
+
+Printed Material:
+
+Websites:
+
+  geeksforgeeks.org - answers all my questions (properties of a max heap, recursive functions, level order traversal, etc.). 10/10 would recommend
+  stackoverflow.com - how to convert ss to string
+
+Other:

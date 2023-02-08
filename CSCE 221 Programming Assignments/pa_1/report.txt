@@ -1,0 +1,46 @@
+1. Please list all sources (people, books, webpages, etc.) you consulted regarding this assignment and how they helped: (Sources can be used broadly as reference for the general approach; YOU MUST NOT COPY CODE!)
+
+CSCE 221 Students:
+
+Other People:
+
+Printed Material:
+
+Websites:
+http://cplusplus.com/forum/general/158547/ - creating a destructor
+https://stackoverflow.com/questions/34963158/doubly-linked-list-template-copy-constructor-assignment-operator - creating a copy constructor / assignment operator
+
+Other:
+
+2. Why is the overloaded operator<< a defined outside the class rather than as a member function?  What is the purpose of "friend" in a case like this?
+  since the class is going to be templated, it is much easier to define it outside
+  the class since multiple data types will be output to the console. This will prevent
+  the user from, say, having to access a "print" function from inside the object being passed,
+  which will not always be the case given that any data type can be passed through the template.
+  "Friend" allows this function to access the private variables within NetworkPacket, so, if a NetworkPacket object
+  is passed through the class, its information can be accessed and output to the console
+
+3. Why is the overloaded operator<< inline in the NetworkPacket class?  Can you think of an alternative to prevent the potential problem?
+  Friend functions are implicitly defined as inline functions, meaning they are "in line" with the rest of the class.
+
+4. Why does the Node not need a destructor, and thus not be applicable for the Rule of Three?
+  DoublyLinkedList takes care of the creating and deleting of nodes. If each node had its own destructor,
+  the data would be freed twice, causing memory leaks.
+
+5. Give an example of when a doubly-linked list may be advantageous over a singly-linked one.
+  deleting nodes is much easier as you have access to the previous node.
+
+6. How many steps does it take to pop_front() from the queue to get the next item?  That is, if we think about the number of computations needed to get the next element in the queue as the queue grows to any arbitrary size, how complex is the pop_front() (also called "dequeue") operation?
+  1. a temporary node must be created to hold the first element of the list
+  2. the front value needs to be reassigned to the next element
+  3. data from the element is assigned to a variable
+  4. the old element can now be deleted
+  5. the data from the old element is returned
+
+7. What is an advantage of templated classes?
+  with a templated class, the user has the ability to pass different data types through a class.
+  In the case of this homework, the user would be able to create a doubly linked list containing
+  any data type they choose (int, string, other classes, etc.)
+
+8. When creating a templated version of the DoublyLinkedList, why do you need to put "template class DoublyLinkedList<>" for each type at the bottom of the source file?
+    in order for the linker to find an instance of the class that contains each data type

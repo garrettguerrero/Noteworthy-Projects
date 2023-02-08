@@ -1,0 +1,40 @@
+1. Please list all sources (people, books, webpages, etc.) you consulted regarding this assignment and how they helped: (Sources can be used broadly as reference for the general approach; YOU MUST NOT COPY CODE!)
+
+CSCE 221 Students:
+
+Christopher Colling - he showed me the way of the map
+
+Other People:
+
+Printed Material:
+
+Websites:
+
+https://stackoverflow.com/questions/2684603/how-do-i-initialize-a-float-to-its-max-min-value - getting max float value
+https://www.delftstack.com/howto/cpp/how-to-iterate-over-map-in-cpp/ - map iteration (unused)
+
+
+Other:
+
+
+2. Describe the approach you used to implement Dijkstra's algorithm.  This should include a description of the data structures you used and if they come from STL, your own implementation, or other (such as the provided Locator Heap).
+
+  I largely followed the pseudocode given in lecture to implement the algorithm.
+  I used the locator heap to reorder the vertices based on their distances so that
+  the shortest available path was always chosen. As the minimum values were popped
+  off the heap, I pushed each value onto a vector which was then returned as the resulting path.
+
+
+3. Describe another approach which could be used to implement Dijkstra's algorithm.  For instance, this could include a contrast between storing flags such as "visited" in an auxillary structure as opposed to inside the vertex.
+
+  The vector of verticies could be replaced by a sorted array (or a hash). This would allow for easy access
+  of verticies (by index) rather than having to rely on an auxillary structure like a map.
+
+
+4. Give an example of using an STL data structure such as map or unordered_map to store and access auxillary data used in Dijkstra's algorithm.
+
+  Using a map greatly decreases the time it takes to find a vertex when given a label.
+  I used one in my implementation (vertexMap) and stored all the vertices with their respective
+  labels so that I could easily access them. Originally, I had created a helper function that
+  consisted of finding each vertex using a vector which took O(n) time. The map implementation
+  cut this down to O(1).

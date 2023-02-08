@@ -1,0 +1,9 @@
+main:
+    irmovq $1, %rbx
+    irmovq $8, %rsp
+    call funca
+    addq %rax, %rbx
+    halt
+funca:
+    irmovq $2, %rax
+    ret

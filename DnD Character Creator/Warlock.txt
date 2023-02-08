@@ -1,0 +1,6 @@
+Hit_Dice: -1d8
+HP_Max: -8
+saving_throws:- - - - -X-X-
+2
+Arcana-Deception-History-Intimidation-Investigation-Nature-Religion
+

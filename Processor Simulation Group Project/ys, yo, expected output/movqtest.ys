@@ -1,0 +1,6 @@
+main:
+    irmovq $8, %rax
+    rrmovq %rax, %rcx
+    rmmovq %rax, (%rcx)
+    mrmovq (%rcx), %rdx
+    halt

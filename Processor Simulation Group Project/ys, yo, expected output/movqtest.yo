@@ -1,0 +1,6 @@
+0x000:                      | main:
+0x000: 30f00800000000000000 |     irmovq $8, %rax
+0x00a: 2001                 |     rrmovq %rax, %rcx
+0x00c: 40010000000000000000 |     rmmovq %rax, (%rcx)
+0x016: 50210000000000000000 |     mrmovq (%rcx), %rdx
+0x020: 00                   |     halt

@@ -1,0 +1,5 @@
+Hit_Dice: -1d10
+HP_Max: -10
+saving_throws:- - - - -X-X-
+2
+Athletics-Insight-Intimidation-Medicine-Persuasion-Religion

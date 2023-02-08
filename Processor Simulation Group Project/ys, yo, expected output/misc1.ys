@@ -1,0 +1,12 @@
+main:
+    irmovq $16, %rsp
+    irmovq $7, %rbx
+    pushq %rbx
+    popq %rcx
+    nop
+    addq %rbx, %rcx
+    
+    irmovq $3, %r8x
+    andq %rbx, %r8x
+    irmovq $3, %r9x
+    xorq %rbx, %r9x

@@ -1,0 +1,48 @@
+Please list all sources (people, books, webpages, etc.) you consulted regarding this assignment and how they helped: (Sources can be used broadly as reference for the general approach; YOU MUST NOT COPY CODE!)
+
+CSCE 221 Students:
+
+Other People:
+
+Printed Material:
+
+Websites: geeksforgeeks.org, stackoverflow.com for syntax and general troubleshooting
+
+Other:
+  https://youtu.be/_r7i5X0rXJk -- makefile creation
+
+
+2. Regarding inheritance, what are pure virtual functions?
+
+  pure virtual functions are parent functions to those defined in consequent derived
+  classes (i.e. the functions in the HashTable class are parent to their corresponding
+  functions in ProbingHashTable).
+
+
+3. What are you observations on the runtime of the different hash table methods?
+
+  by and large, chaining is much faster than chaining, however, in cases where there
+  are many of the same key, probing is more likely to be faster as once the key is
+  found, it is unnecessary to search through an entire list to determine its place.
+  To insert, chaining can be O(n), but is often constant time as it typically just
+  has to push an item onto the end of a list. As a probing list fills up, it creeps
+  closer and closer to O(n) more often than not.
+
+
+4. We did an extremely simplified blockchain and cryptocurrency, using the requirement that the hash only needs to begin with '2'.  What mining approach did you create to try to find a valid nonce?
+
+  for each character from 0 to z, a nonce is found by repeatedly adding said
+  character to the end of the transaction string until a nonce is produced (i.e
+  if the string is abc, abc0000 might produce a nonce). This nonce is then
+  passed into the sign_block function provided in block.h. If this nonce is not
+  adequate, a nonce will be found using the next character in the list, and so on.
+
+
+5. How might you approach this problem differently with a more restrictive problem?  For instance, if you change the validator to require the hash begin with "221", you will find the mining operation takes significantly more time.  Briefly discuss this in the context of modern cryptocurrency mining.
+
+  possibly by utilizing an artificial intelligence that can keep track of resulting
+  nonces from various inputs. For example, if a certain input produced a nonce starting
+  with "212," that information could be saved along with any other inputs that spat
+  out similar results (122, 112, etc). a possible pattern may be found within these
+  inputs that the AI could then utilize to narrow down inputs, producing nonces
+  at a higher rate.

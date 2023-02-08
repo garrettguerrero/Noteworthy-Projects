@@ -1,0 +1,7 @@
+strength: 0
+dexterity: 0
+constitution: 0
+intelligence: 1
+wisdom: 0
+charisma: 2
+speed: 30

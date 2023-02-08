@@ -1,0 +1,32 @@
+main:
+    irmovq $1, %rbx
+    irmovq $1, %rcx
+    subq %rbx, %rcx
+    jl bad
+    jg bad
+    jne bad
+    je j1
+    halt
+
+j1:
+    # this proves that the first jump was successful
+    irmovq $2, %r8
+
+    irmovq $2, %rbx
+    irmovq $1, %rax
+    subq %rbx, %rcx
+    jge bad
+    jle j2
+    irmovq $99, %rax
+
+j2:
+    irmovq $2, %r9
+    jmp j3
+    halt
+
+j3:
+    irmovq $2, %r10
+# if we see a value of 99, we know there was a mistake
+bad:
+    irmovq $99, %rax
+    halt

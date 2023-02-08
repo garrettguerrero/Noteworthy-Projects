@@ -1,0 +1,5 @@
+Hit_Dice: -1d12
+HP_Max: -12
+saving_throws:-X- -X- - - -
+2
+Animal Handling-Athletics-Intimidation-Nature-Perception-Survival

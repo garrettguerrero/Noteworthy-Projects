@@ -1,0 +1,98 @@
+0x000:                      | main:
+0x000: 30f42004000000000000 |     irmovq $1056, %rsp
+                            | 
+                            |     # starting loc for a
+0x00a: 30f80000000000000000 |     irmovq $0, %r8
+0x014: 30f30200000000000000 |     irmovq $2, %rbx
+0x01e: 40380000000000000000 |     rmmovq %rbx, $0(%r8)
+0x028: 30f30200000000000000 |     irmovq $2, %rbx
+0x032: 40380800000000000000 |     rmmovq %rbx, $8(%r8)
+0x03c: 30f30300000000000000 |     irmovq $3, %rbx
+0x046: 40381000000000000000 |     rmmovq %rbx, $16(%r8)
+0x050: 30f30400000000000000 |     irmovq $4, %rbx
+0x05a: 40381800000000000000 |     rmmovq %rbx, $24(%r8)
+                            | 
+                            |     # starting loc for b
+0x064: 30f92000000000000000 |     irmovq $32, %r9
+0x06e: 30f30200000000000000 |     irmovq $2, %rbx
+0x078: 40390000000000000000 |     rmmovq %rbx, $0(%r9)
+0x082: 30f30200000000000000 |     irmovq $2, %rbx
+0x08c: 40390800000000000000 |     rmmovq %rbx, $8(%r9)
+0x096: 30f30200000000000000 |     irmovq $2, %rbx
+0x0a0: 40391000000000000000 |     rmmovq %rbx, $16(%r9)
+0x0aa: 30f30300000000000000 |     irmovq $3, %rbx
+0x0b4: 40391800000000000000 |     rmmovq %rbx, $24(%r9)
+                            | 
+0x0be: 80fe00000000000000   |     call matmult
+                            | 
+0x0c7: 30fc6900000000000000 |     irmovq $105, %r12
+0x0d1: 00                   |     halt
+                            | 
+                            | # mult is our multiplier
+0x0d2:                      | mult:
+                            |     # a -> %rdi, b -> %rsi
+0x0d2: 30f00000000000000000 |     irmovq $0, %rax
+0x0dc: 30fb0100000000000000 |     irmovq $1, %r11
+0x0e6: 80f000000000000000   |     call loop
+0x0ef: 90                   |     ret
+                            | 
+0x0f0:                      | loop:
+0x0f0: 6070                 |     addq %rdi, %rax
+0x0f2: 61b6                 |     subq %r11, %rsi
+0x0f4: 76f000000000000000   |     jg loop
+0x0fd: 90                   |     ret
+                            | 
+0x0fe:                      | matmult:
+                            |     # a pointer -> %r8, b pointer -> %r9
+                            |     # c pointer -> %rcx
+                            | 
+                            |     # op for c[0][0]
+                            |     # temp = %rdx, %r10
+0x0fe: 30f14000000000000000 |     irmovq $64, %rcx
+                            | 
+0x108: 50780000000000000000 |     mrmovq (%r8), %rdi
+0x112: 50690000000000000000 |     mrmovq (%r9), %rsi
+0x11c: 80d200000000000000   |     call mult #stores result in rax
+0x125: 200a                 |     rrmovq %rax, %r10 #gets first value
+0x127: 50780800000000000000 |     mrmovq $8(%r8), %rdi
+0x131: 50691000000000000000 |     mrmovq $16(%r9), %rsi
+0x13b: 80d200000000000000   |     call mult
+0x144: 600a                 |     addq %rax, %r10
+0x146: 40a10000000000000000 |     rmmovq %r10, (%rcx) # done setting c1
+                            | 
+0x150: 50780000000000000000 |     mrmovq (%r8), %rdi
+0x15a: 50690800000000000000 |     mrmovq 8(%r9), %rsi
+0x164: 80d200000000000000   |     call mult #stores result in rax
+0x16d: 200a                 |     rrmovq %rax, %r10 #gets first value
+0x16f: 50780800000000000000 |     mrmovq $8(%r8), %rdi
+0x179: 50691800000000000000 |     mrmovq $24(%r9), %rsi
+0x183: 80d200000000000000   |     call mult
+0x18c: 600a                 |     addq %rax, %r10
+0x18e: 40a10800000000000000 |     rmmovq %r10, $8(%rcx)
+                            | 
+0x198: 50781000000000000000 |     mrmovq $16(%r8), %rdi
+0x1a2: 50690000000000000000 |     mrmovq (%r9), %rsi
+0x1ac: 80d200000000000000   |     call mult #stores result in rax
+0x1b5: 200a                 |     rrmovq %rax, %r10 #gets first value
+0x1b7: 50781800000000000000 |     mrmovq $24(%r8), %rdi
+0x1c1: 50691000000000000000 |     mrmovq $16(%r9), %rsi
+0x1cb: 80d200000000000000   |     call mult
+0x1d4: 600a                 |     addq %rax, %r10
+0x1d6: 40a11000000000000000 |     rmmovq %r10, $16(%rcx)
+                            | 
+0x1e0: 50781000000000000000 |     mrmovq $16(%r8), %rdi
+0x1ea: 50690800000000000000 |     mrmovq $8(%r9), %rsi
+0x1f4: 80d200000000000000   |     call mult #stores result in rax
+0x1fd: 200a                 |     rrmovq %rax, %r10 #gets first value
+0x1ff: 50781800000000000000 |     mrmovq $24(%r8), %rdi
+0x209: 50691800000000000000 |     mrmovq $24(%r9), %rsi
+0x213: 80d200000000000000   |     call mult
+0x21c: 600a                 |     addq %rax, %r10
+0x21e: 40a11800000000000000 |     rmmovq %r10, $24(%rcx)
+                            | 
+0x228: 90                   |     ret
+                            | 
+                            | 
+                            | 
+                            | 
+                            |     
